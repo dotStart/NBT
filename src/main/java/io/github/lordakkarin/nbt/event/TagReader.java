@@ -66,15 +66,11 @@ public class TagReader {
         this.buffer.markReaderIndex();
 
         try {
-            visitor.visitCompound();
-
             while (this.buffer.isReadable()) {
                 TagType tagType = TagType.byTypeId(this.buffer.readByte());
                 visitor.visitKey(this.readString());
                 this.visitValue(visitor, tagType);
             }
-
-            visitor.visitCompoundEnd();
         } finally {
             this.buffer.resetReaderIndex();
         }

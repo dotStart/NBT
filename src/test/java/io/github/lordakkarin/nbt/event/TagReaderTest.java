@@ -25,11 +25,11 @@ public class TagReaderTest {
         TagReader reader = new TagReader(TagReaderTest.class.getResourceAsStream("/hello_world.nbt"));
         reader.accept(visitor);
 
-        verify(visitor, times(2)).visitCompound();
+        verify(visitor).visitCompound();
         verify(visitor).visitKey("hello world");
         verify(visitor).visitKey("name");
         verify(visitor).visitString("Bananrama");
-        verify(visitor, times(2)).visitCompoundEnd();
+        verify(visitor).visitCompoundEnd();
     }
 
     /**
@@ -42,8 +42,8 @@ public class TagReaderTest {
         TagReader reader = new TagReader(TagReaderTest.class.getResourceAsStream("/bigtest.nbt"));
         reader.accept(visitor);
 
-        verify(visitor, times(7)).visitCompound();
-        verify(visitor, times(7)).visitCompoundEnd();
+        verify(visitor, times(6)).visitCompound();
+        verify(visitor, times(6)).visitCompoundEnd();
 
         verify(visitor, times(4)).visitKey("name");
         verify(visitor, times(2)).visitKey("value");
