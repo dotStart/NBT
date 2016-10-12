@@ -14,6 +14,7 @@ import java.nio.file.StandardOpenOption;
 
 import javax.annotation.Nonnull;
 import javax.annotation.WillNotClose;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -24,6 +25,7 @@ import io.netty.buffer.Unpooled;
  *
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
+@NotThreadSafe
 public class TagReader {
     private final ByteBuf buffer;
 

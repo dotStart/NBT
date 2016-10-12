@@ -5,6 +5,8 @@ import java.util.Optional;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * Provides an abstract visitor which is capable of passing all its values to the next visitor in a
@@ -12,6 +14,8 @@ import javax.annotation.Nullable;
  *
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
+@Immutable
+@ThreadSafe
 public abstract class AbstractTagVisitor implements TagVisitor {
     private final TagVisitor next;
 

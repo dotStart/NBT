@@ -16,6 +16,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.WillNotClose;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ReadOnlyByteBuf;
@@ -27,6 +28,7 @@ import io.netty.buffer.Unpooled;
  *
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
+@NotThreadSafe
 public class TagWriter extends AbstractTagVisitor {
     private final ByteBuf buffer;
     private Stack<TagType> parentStack = new Stack<>();
