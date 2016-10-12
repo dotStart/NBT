@@ -133,9 +133,9 @@ public abstract class AbstractTagVisitor implements TagVisitor {
      * {@inheritDoc}
      */
     @Override
-    public void visitCompound(@Nonnull String name) {
+    public void visitCompound() {
         if (this.next != null) {
-            this.next.visitCompound(name);
+            this.next.visitCompound();
         }
     }
 

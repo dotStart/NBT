@@ -32,7 +32,7 @@ public interface TagVisitor {
 
     void visitList(@Nullable TagType type, @Nonnegative int length);
 
-    void visitCompound(@Nonnull String name);
+    void visitCompound();
 
     void visitKey(@Nonnull String name);
 
