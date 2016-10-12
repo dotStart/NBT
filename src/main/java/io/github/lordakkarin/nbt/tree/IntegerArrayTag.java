@@ -12,14 +12,14 @@ import io.github.lordakkarin.nbt.event.TagVisitor;
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
 @NotThreadSafe
-public class IntegerArray implements Tag {
+public class IntegerArrayTag implements Tag {
     private int[] value;
 
-    public IntegerArray() {
+    public IntegerArrayTag() {
         this.value = new int[0];
     }
 
-    public IntegerArray(int[] value) {
+    public IntegerArrayTag(int[] value) {
         this.value = value;
     }
 
@@ -59,9 +59,9 @@ public class IntegerArray implements Tag {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof IntegerArray)) return false;
+        if (!(o instanceof IntegerArrayTag)) return false;
 
-        IntegerArray that = (IntegerArray) o;
+        IntegerArrayTag that = (IntegerArrayTag) o;
         return Arrays.equals(this.value, that.value);
     }
 
