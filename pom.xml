@@ -82,6 +82,18 @@
         <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
         <defaultGoal>clean package</defaultGoal>
 
+        <testResources>
+            <testResource>
+                <directory>${project.basedir}/src/test/resources</directory>
+                <targetPath>.</targetPath>
+                <filtering>false</filtering>
+
+                <includes>
+                    <include>*.nbt</include>
+                </includes>
+            </testResource>
+        </testResources>
+
         <pluginManagement>
             <plugins>
                 <plugin>
