@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 
 import javax.annotation.Nonnull;
@@ -65,6 +66,16 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
         return this.map.containsKey(key);
     }
 
+    public boolean containsKey(@Nonnull String key, @Nonnull Class<? extends Tag> type) {
+        Tag tag = this.get(key);
+
+        if (tag == null) {
+            return false;
+        }
+
+        return type.isInstance(tag);
+    }
+
     @Nullable
     @SuppressWarnings("unchecked")
     public <T extends Tag> T get(@Nonnull String key) {
@@ -97,6 +108,103 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
 
     public boolean remove(@Nonnull String key, @Nonnull Tag tag) {
         return this.map.remove(key, tag);
+    }
+
+    @Nullable
+    public byte[] getByteArray(@Nonnull String key) {
+        return Optional.ofNullable((ByteArrayTag) this.get(key)).map(ByteArrayTag::getValue).orElse(null);
+    }
+
+    public byte getByte(@Nonnull String key) {
+        return Optional.ofNullable((ByteTag) this.get(key)).map(ByteTag::getValue).orElse((byte) 0);
+    }
+
+    public double getDouble(@Nonnull String key) {
+        return Optional.ofNullable((DoubleTag) this.get(key)).map(DoubleTag::getValue).orElse(0d);
+    }
+
+    public float getFloat(@Nonnull String key) {
+        return Optional.ofNullable((FloatTag) this.get(key)).map(FloatTag::getValue).orElse(0f);
+    }
+
+    @Nullable
+    public int[] getIntegerArray(@Nonnull String key) {
+        return Optional.ofNullable((IntegerArrayTag) this.get(key)).map(IntegerArrayTag::getValue).orElse(null);
+    }
+
+    public int getInteger(@Nonnull String key) {
+        return Optional.ofNullable((IntegerTag) this.get(key)).map(IntegerTag::getValue).orElse(0);
+    }
+
+    public long getLong(@Nonnull String key) {
+        return Optional.ofNullable((IntegerTag) this.get(key)).map(IntegerTag::getValue).orElse(0);
+    }
+
+    public short getShort(@Nonnull String key) {
+        return Optional.ofNullable((ShortTag) this.get(key)).map(ShortTag::getValue).orElse((short) 0);
+    }
+
+    @Nullable
+    public String getString(@Nonnull String key) {
+        return Optional.ofNullable((StringTag) this.get(key)).map(StringTag::getValue).orElse(null);
+    }
+
+    public void setByteArray(@Nonnull String key, @Nonnull byte[] value) {
+        this.getOrCreate(key, ByteArrayTag.class).setValue(value);
+    }
+
+    public void setByte(@Nonnull String key, byte value) {
+        this.getOrCreate(key, ByteTag.class).setValue(value);
+    }
+
+    public void setDouble(@Nonnull String key, double value) {
+        this.getOrCreate(key, DoubleTag.class).setValue(value);
+    }
+
+    public void setFloat(@Nonnull String key, float value) {
+        this.getOrCreate(key, FloatTag.class).setValue(value);
+    }
+
+    public void setInteger(@Nonnull String key, int value) {
+        this.getOrCreate(key, IntegerTag.class).setValue(value);
+    }
+
+    public void setIntegerArray(@Nonnull String key, @Nonnull int[] value) {
+        this.getOrCreate(key, IntegerArrayTag.class).setValue(value);
+    }
+
+    public void setLong(@Nonnull String key, long value) {
+        this.getOrCreate(key, LongTag.class).setValue(value);
+    }
+
+    public void setShort(@Nonnull String key, short value) {
+        this.getOrCreate(key, ShortTag.class).setValue(value);
+    }
+
+    public void setString(@Nonnull String key, @Nonnull String value) {
+        this.getOrCreate(key, StringTag.class).setValue(value);
+    }
+
+    /**
+     * Retrieves a key of a certain type or creates it.
+     * @param key a key.
+     * @param type a type.
+     * @param <T> a type.
+     * @return a tag.
+     */
+    @Nonnull
+    private <T extends Tag> T getOrCreate(@Nonnull String key, @Nonnull Class<T> type) {
+        if (!this.containsKey(key, type)) {
+            try {
+                T instance = type.newInstance();
+                this.put(key, instance);
+                return instance;
+            } catch (InstantiationException | IllegalAccessException ex) {
+                throw new RuntimeException("Could not construct tag: " + ex.getMessage(), ex);
+            }
+        }
+
+        return this.get(key);
     }
 
     /**
