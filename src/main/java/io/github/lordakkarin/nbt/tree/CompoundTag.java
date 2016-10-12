@@ -204,6 +204,7 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
             }
         }
 
+        // noinspection ConstantConditions
         return this.get(key);
     }
 
