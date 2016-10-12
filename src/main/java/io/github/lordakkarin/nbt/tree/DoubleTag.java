@@ -39,6 +39,14 @@ public class DoubleTag implements Tag {
         return TagType.DOUBLE;
     }
 
+    public double getValue() {
+        return this.value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
     /**
      * {@inheritDoc}
      */
