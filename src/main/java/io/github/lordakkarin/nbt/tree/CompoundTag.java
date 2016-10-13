@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -56,6 +57,10 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
     @Override
     public Iterator<Map.Entry<String, Tag>> iterator() {
         return this.map.entrySet().iterator();
+    }
+
+    public void clear() {
+        this.map.clear();
     }
 
     public void computeIfAbsent(@Nonnull String key, @Nonnull Function<String, ? extends Tag> factory) {
@@ -206,6 +211,11 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
 
         // noinspection ConstantConditions
         return this.get(key);
+    }
+
+    @Nonnegative
+    public int size() {
+        return this.map.size();
     }
 
     /**

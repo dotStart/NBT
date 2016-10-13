@@ -117,6 +117,11 @@ public class ListTag<T extends Tag> implements Iterable<T>, Tag {
         this.cleanup();
     }
 
+    @Nonnegative
+    public int size() {
+        return this.elements.size();
+    }
+
     /**
      * {@inheritDoc}
      */
