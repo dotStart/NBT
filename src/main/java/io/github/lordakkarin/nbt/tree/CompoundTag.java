@@ -142,7 +142,7 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
     }
 
     public long getLong(@Nonnull String key) {
-        return Optional.ofNullable((IntegerTag) this.get(key)).map(IntegerTag::getValue).orElse(0);
+        return Optional.ofNullable((LongTag) this.get(key)).map(LongTag::getValue).orElse(0L);
     }
 
     public short getShort(@Nonnull String key) {
