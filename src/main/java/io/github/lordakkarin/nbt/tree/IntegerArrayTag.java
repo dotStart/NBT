@@ -3,6 +3,7 @@ package io.github.lordakkarin.nbt.tree;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -66,6 +67,11 @@ public class IntegerArrayTag implements Iterable<Integer>, Tag {
 
     public void setValue(@Nonnull int[] value) {
         this.value = value;
+    }
+
+    @Nonnegative
+    public int getLength() {
+        return this.value.length;
     }
 
     /**
