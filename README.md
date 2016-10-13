@@ -38,7 +38,7 @@ ValidationVisitor validationVisitor = new ValidationVisitor(visitor);
 
 TagReader reader = new TagReader(inputStream);
 reader.accept(validationVisitor);
-``´
+```
 
 ```java
 TreeVisitor visitor = new TreeVisitor();
