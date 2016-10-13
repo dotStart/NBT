@@ -197,6 +197,18 @@ public class TagWriter extends AbstractTagVisitor {
      * {@inheritDoc}
      */
     @Override
+    public void visitRoot(@Nonnull String name) {
+        this.writeType(TagType.COMPOUND);
+        this.writeString(name);
+        this.parentStack.push(TagType.COMPOUND);
+
+        super.visitRoot(name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void visitKey(@Nonnull String name) {
         this.key = name;
 

@@ -68,10 +68,24 @@ public class TagReader {
         this.buffer.markReaderIndex();
 
         try {
+            TagType tagType = TagType.byTypeId(this.buffer.readByte());
+
+            if (tagType != TagType.COMPOUND) {
+                throw new IllegalStateException("Malformed NBT data: Expected compound but got " + tagType);
+            }
+
+            visitor.visitRoot(this.readString());
+
             while (this.buffer.isReadable()) {
-                TagType tagType = TagType.byTypeId(this.buffer.readByte());
+                TagType elementType = TagType.byTypeId(this.buffer.readByte());
+
+                if (elementType == TagType.END) {
+                    visitor.visitCompoundEnd();
+                    break;
+                }
+
                 visitor.visitKey(this.readString());
-                this.visitValue(visitor, tagType);
+                this.visitValue(visitor, elementType);
             }
         } finally {
             this.buffer.resetReaderIndex();

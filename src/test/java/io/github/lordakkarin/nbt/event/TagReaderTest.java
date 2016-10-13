@@ -25,8 +25,7 @@ public class TagReaderTest {
         TagReader reader = new TagReader(TagReaderTest.class.getResourceAsStream("/hello_world.nbt"));
         reader.accept(visitor);
 
-        verify(visitor).visitCompound();
-        verify(visitor).visitKey("hello world");
+        verify(visitor).visitRoot("hello world");
         verify(visitor).visitKey("name");
         verify(visitor).visitString("Bananrama");
         verify(visitor).visitCompoundEnd();
@@ -42,7 +41,9 @@ public class TagReaderTest {
         TagReader reader = new TagReader(TagReaderTest.class.getResourceAsStream("/bigtest.nbt"));
         reader.accept(visitor);
 
-        verify(visitor, times(6)).visitCompound();
+        verify(visitor).visitRoot("Level");
+
+        verify(visitor, times(5)).visitCompound();
         verify(visitor, times(6)).visitCompoundEnd();
 
         verify(visitor, times(4)).visitKey("name");
@@ -50,8 +51,7 @@ public class TagReaderTest {
         verify(visitor, times(2)).visitKey("created-on");
         verify(visitor, times(2)).visitLong(1264099775885L);
 
-        verify(visitor).visitKey("Level");
-
+        verify(visitor).visitRoot("Level");
         verify(visitor).visitKey("nested compound test");
 
         verify(visitor).visitKey("egg");

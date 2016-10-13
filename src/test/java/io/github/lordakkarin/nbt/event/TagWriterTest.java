@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.nio.file.Paths;
 
 import javax.annotation.Nonnull;
 import javax.annotation.WillNotClose;
@@ -57,6 +58,8 @@ public class TagWriterTest {
             TagReader reader = new TagReader(inputStream);
             reader.accept(writer);
         }
+
+        writer.write(Paths.get("test.nbt"));
 
         try (InputStream inputStream = this.getClass().getResourceAsStream("/bigtest.nbt")) {
             ByteBuf expected = this.readResource(Channels.newChannel(inputStream));

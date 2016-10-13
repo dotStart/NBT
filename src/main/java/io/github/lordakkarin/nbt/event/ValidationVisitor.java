@@ -197,6 +197,21 @@ public class ValidationVisitor extends AbstractTagVisitor {
      * {@inheritDoc}
      */
     @Override
+    public void visitRoot(@Nonnull String name) {
+        if (this.stack.size() != 0) {
+            throw new IllegalStateException("Unexpected root tag");
+        }
+
+        this.verifyValue(TagType.COMPOUND);
+        this.stack.push(TagType.COMPOUND);
+
+        super.visitRoot(name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void visitKey(@Nonnull String name) {
         this.key = name;
 

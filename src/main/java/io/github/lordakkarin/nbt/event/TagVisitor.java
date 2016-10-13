@@ -34,6 +34,8 @@ public interface TagVisitor {
 
     void visitCompound();
 
+    void visitRoot(@Nonnull String name);
+
     void visitKey(@Nonnull String name);
 
     void visitCompoundEnd();

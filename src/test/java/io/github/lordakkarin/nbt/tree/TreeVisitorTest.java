@@ -23,10 +23,9 @@ public class TreeVisitorTest {
         reader.accept(visitor);
 
         Assert.assertNotNull(visitor.getRoot());
-        Assert.assertEquals(CompoundTag.class, visitor.getRoot().getClass());
         Assert.assertEquals(TagType.COMPOUND, visitor.getRoot().getType());
 
-        CompoundTag tag = (CompoundTag) visitor.getRoot();
+        RootTag tag = visitor.getRoot();
         Assert.assertEquals(1, tag.size());
         Assert.assertTrue(tag.containsKey("name"));
         Assert.assertTrue(tag.containsKey("name", StringTag.class));
@@ -46,11 +45,10 @@ public class TreeVisitorTest {
         reader.accept(visitor);
 
         Assert.assertNotNull(visitor.getRoot());
-        Assert.assertEquals(CompoundTag.class, visitor.getRoot().getClass());
         Assert.assertEquals(TagType.COMPOUND, visitor.getRoot().getType());
 
         {
-            CompoundTag root = ((CompoundTag) visitor.getRoot());
+            RootTag root = visitor.getRoot();
 
             Assert.assertEquals(11, root.size());
             Assert.assertTrue(root.containsKey("nested compound test"));

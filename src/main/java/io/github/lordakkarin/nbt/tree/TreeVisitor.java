@@ -20,7 +20,7 @@ import io.github.lordakkarin.nbt.event.TagVisitor;
 @NotThreadSafe
 public class TreeVisitor extends AbstractTagVisitor {
     private final Stack<ParentNode> stack = new Stack<>();
-    private Tag root;
+    private RootTag root;
 
     public TreeVisitor() {
         this(null);
@@ -38,7 +38,6 @@ public class TreeVisitor extends AbstractTagVisitor {
     @SuppressWarnings("unchecked")
     private void pushTag(@Nonnull Tag tag) {
         if (this.stack.isEmpty()) {
-            this.root = tag;
             return;
         }
 
@@ -51,7 +50,7 @@ public class TreeVisitor extends AbstractTagVisitor {
     }
 
     @Nullable
-    public Tag getRoot() {
+    public RootTag getRoot() {
         return this.root;
     }
 
@@ -175,6 +174,17 @@ public class TreeVisitor extends AbstractTagVisitor {
         this.stack.push(new CompoundParentNode(tag));
 
         super.visitCompound();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void visitRoot(@Nonnull String name) {
+        this.root = new RootTag(name);
+        this.stack.push(new CompoundParentNode(this.root));
+
+        super.visitRoot(name);
     }
 
     /**
