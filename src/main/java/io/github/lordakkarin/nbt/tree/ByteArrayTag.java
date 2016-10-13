@@ -1,6 +1,7 @@
 package io.github.lordakkarin.nbt.tree;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -12,7 +13,7 @@ import io.github.lordakkarin.nbt.event.TagVisitor;
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
 @NotThreadSafe
-public class ByteArrayTag implements Tag {
+public class ByteArrayTag implements Iterable<Byte>, Tag {
     private byte[] value;
 
     public ByteArrayTag() {
@@ -21,6 +22,20 @@ public class ByteArrayTag implements Tag {
 
     public ByteArrayTag(@Nonnull byte[] value) {
         this.value = value;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Iterator<Byte> iterator() {
+        Byte[] obj = new Byte[this.value.length];
+
+        for (int i = 0; i < obj.length; ++i) {
+            obj[i] = this.value[i];
+        }
+
+        return new ArrayIterator<>(obj);
     }
 
     /**
