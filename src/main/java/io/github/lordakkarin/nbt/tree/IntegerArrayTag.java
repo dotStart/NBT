@@ -69,6 +69,14 @@ public class IntegerArrayTag implements Iterable<Integer>, Tag {
         this.value = value;
     }
 
+    public int get(@Nonnegative int index) {
+        return this.value[index];
+    }
+
+    public void set(@Nonnegative int index, int value) {
+        this.value[index] = value;
+    }
+
     @Nonnegative
     public int getLength() {
         return this.value.length;

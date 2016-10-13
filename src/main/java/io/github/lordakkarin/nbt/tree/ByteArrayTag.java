@@ -69,6 +69,14 @@ public class ByteArrayTag implements Iterable<Byte>, Tag {
         this.value = value;
     }
 
+    public byte get(@Nonnegative int index) {
+        return this.value[index];
+    }
+
+    public void set(@Nonnegative int index, byte value) {
+        this.value[index] = value;
+    }
+
     @Nonnegative
     public int getLength() {
         return this.value.length;
