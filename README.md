@@ -32,6 +32,14 @@ Copyright (C) 2016 Johannes "Akkarin" Donath and other copyright owners as docum
 Usage
 -----
 
+```xml
+<dependency>
+        <groupId>io.github.lordakkarin</groupId>
+        <artifactId>nbt</artifactId>
+        <version>1.0</version>
+</dependency>
+```
+
 ```java
 TagVisitor visitor = new MyVisitor();
 ValidationVisitor validationVisitor = new ValidationVisitor(visitor);
