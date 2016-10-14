@@ -64,6 +64,7 @@ public class ValidationVisitor extends AbstractTagVisitor {
                     }
 
                     this.key = null;
+                    break;
                 case INTEGER_ARRAY:
                     if (type != TagType.INTEGER) {
                         throw new IllegalStateException("Invalid array element: Expected tag of type INTEGER but got " + type);
