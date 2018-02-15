@@ -36,7 +36,7 @@ public class ListTag<T extends Tag> implements Iterable<T>, Tag {
     this.addAll(Arrays.asList(elements));
   }
 
-  public ListTag(@NonNull TagType type, @NonNull Collection<? extends T> elements) {
+  public ListTag(@NonNull TagType type, @NonNull Iterable<? extends T> elements) {
     this(type);
 
     this.addAll(elements);
@@ -68,7 +68,7 @@ public class ListTag<T extends Tag> implements Iterable<T>, Tag {
     this.addAll(Arrays.asList(elements));
   }
 
-  public void addAll(@NonNull Collection<? extends T> elements) {
+  public void addAll(@NonNull Iterable<? extends T> elements) {
     elements.forEach(this::add);
   }
 
