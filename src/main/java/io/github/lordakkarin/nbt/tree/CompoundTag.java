@@ -4,6 +4,7 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
 import io.github.lordakkarin.nbt.event.TagType;
 import io.github.lordakkarin.nbt.event.TagVisitor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -130,10 +131,10 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
   private <T extends Tag> T getOrCreate(@NonNull String key, @NonNull Class<T> type) {
     if (!this.containsKey(key, type)) {
       try {
-        T instance = type.newInstance();
+        T instance = type.getConstructor().newInstance();
         this.put(key, instance);
         return instance;
-      } catch (InstantiationException | IllegalAccessException ex) {
+      } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException ex) {
         throw new RuntimeException("Could not construct tag: " + ex.getMessage(), ex);
       }
     }
