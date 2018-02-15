@@ -23,7 +23,7 @@
   <!-- Artifact Metadata -->
   <name>NBT Library</name>
   <description>A Java library for reading and writing NBT data.</description>
-  <url>https://github.com/LordAkkarin/NBT</url>
+  <url>https://github.com/dotStart/NBT</url>
   <inceptionYear>2016</inceptionYear>
 
   <developers>
@@ -37,14 +37,14 @@
 
   <scm>
     <tag>master</tag>
-    <url>https://github.com/LordAkkarin/NBT</url>
-    <connection>scm:git:git@github.com:/LordAkkarin/NBT.git</connection>
-    <developerConnection>scm:git:git@github.com:/LordAkkarin/NBT.git</developerConnection>
+    <url>https://github.com/dotStart/NBT</url>
+    <connection>scm:git:git@github.com:/dotStart/NBT.git</connection>
+    <developerConnection>scm:git:git@github.com:/dotStart/NBT.git</developerConnection>
   </scm>
 
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/LordAkkarin/NBT/issues</url>
+    <url>https://github.com/dotStart/NBT/issues</url>
   </issueManagement>
 
   <distributionManagement>
