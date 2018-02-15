@@ -1,11 +1,11 @@
 package io.github.lordakkarin.nbt.tree;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import io.github.lordakkarin.nbt.event.AbstractTagVisitor;
 import io.github.lordakkarin.nbt.event.TagType;
 import io.github.lordakkarin.nbt.event.TagVisitor;
 import java.util.Stack;
-import edu.umd.cs.findbugs.annotations.NonNull;
-import edu.umd.cs.findbugs.annotations.Nullable;
 
 /**
  * Provides a visitor which is capable of converting the inputs from types like {@link

@@ -1,8 +1,8 @@
 package io.github.lordakkarin.nbt.event;
 
-import java.util.Optional;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
+import java.util.Optional;
 
 /**
  * Provides an abstract visitor which is capable of passing all its values to the next visitor in a

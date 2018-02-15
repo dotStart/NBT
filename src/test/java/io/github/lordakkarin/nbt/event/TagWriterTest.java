@@ -1,5 +1,6 @@
 package io.github.lordakkarin.nbt.event;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import java.io.IOException;
@@ -8,7 +9,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Paths;
-import edu.umd.cs.findbugs.annotations.NonNull;
 import org.junit.Assert;
 import org.junit.Test;
 

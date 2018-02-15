@@ -1,7 +1,7 @@
 package io.github.lordakkarin.nbt.tree;
 
-import java.util.Iterator;
 import edu.umd.cs.findbugs.annotations.NonNull;
+import java.util.Iterator;
 
 /**
  * Provides an iterator implementation which is capable of iterating over arrays directly.

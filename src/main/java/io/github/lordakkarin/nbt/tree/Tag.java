@@ -1,8 +1,8 @@
 package io.github.lordakkarin.nbt.tree;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import io.github.lordakkarin.nbt.event.TagType;
 import io.github.lordakkarin.nbt.event.TagVisitor;
-import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * Represents a basic NBT tag.

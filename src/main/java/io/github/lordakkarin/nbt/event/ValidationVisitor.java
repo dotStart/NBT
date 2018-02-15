@@ -1,8 +1,8 @@
 package io.github.lordakkarin.nbt.event;
 
-import java.util.Stack;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
+import java.util.Stack;
 
 /**
  * Provides a visitor which validates the structure of the passed data against format conventions.

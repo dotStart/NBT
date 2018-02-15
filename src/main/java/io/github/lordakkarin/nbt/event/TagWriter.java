@@ -1,5 +1,7 @@
 package io.github.lordakkarin.nbt.event;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ReadOnlyByteBuf;
 import io.netty.buffer.Unpooled;
@@ -14,8 +16,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Stack;
-import edu.umd.cs.findbugs.annotations.NonNull;
-import edu.umd.cs.findbugs.annotations.Nullable;
 
 /**
  * Accepts the data from a {@link TagReader} or other visitor and turns it into an NBT encoded (and

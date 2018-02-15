@@ -1,5 +1,6 @@
 package io.github.lordakkarin.nbt.event;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import java.io.File;
@@ -13,7 +14,6 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * Reads an NBT encoded (and optionally gzipped) stream of data and passes it to one or more

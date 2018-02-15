@@ -1,9 +1,9 @@
 package io.github.lordakkarin.nbt.tree;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import io.github.lordakkarin.nbt.event.TagVisitor;
 import java.util.Map;
 import java.util.Objects;
-import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * Provides a root NBT tag which acts as the implied compound at the heart of the file.
