@@ -107,12 +107,41 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
+        <version>3.7.0</version>
 
         <configuration>
+          <jdkToolchain>
+            <version>9</version>
+          </jdkToolchain>
+
+          <release>8</release>
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
+
+        <executions>
+          <execution>
+            <id>default-compile</id>
+            <configuration>
+              <release>9</release>
+              <source>9</source>
+              <target>9</target>
+            </configuration>
+          </execution>
+          <execution>
+            <id>base-compile</id>
+
+            <goals>
+              <goal>compile</goal>
+            </goals>
+
+            <configuration>
+              <excludes>
+                <exclude>module-info.java</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
 
       <plugin>
@@ -128,7 +157,6 @@
           </archive>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
@@ -144,11 +172,10 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.3</version>
+        <version>3.0.0</version>
 
         <executions>
           <execution>
@@ -157,28 +184,6 @@
             <goals>
               <goal>jar</goal>
             </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>2.4.3</version>
-
-        <executions>
-          <execution>
-            <phase>package</phase>
-
-            <goals>
-              <goal>shade</goal>
-            </goals>
-
-            <configuration>
-              <minimizeJar>true</minimizeJar>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>shaded</shadedClassifierName>
-            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -194,7 +199,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.5</version>
+            <version>1.6</version>
 
             <executions>
               <execution>
