@@ -69,7 +69,7 @@
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-buffer</artifactId>
-      <version>5.0.0.Alpha2</version>
+      <version>4.1.21.Final</version>
     </dependency>
 
     <dependency>
