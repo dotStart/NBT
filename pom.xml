@@ -218,10 +218,6 @@
                 </goals>
               </execution>
             </executions>
-
-            <configuration>
-              <keyname>8FA4DB55</keyname>
-            </configuration>
           </plugin>
         </plugins>
       </build>
