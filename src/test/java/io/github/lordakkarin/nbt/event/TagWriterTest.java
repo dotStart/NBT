@@ -8,7 +8,8 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -52,13 +53,19 @@ public class TagWriterTest {
       reader.accept(writer);
     }
 
-    writer.write(Paths.get("test.nbt"));
+    Path targetPath = Files.createTempFile("mvntest_", ".nbt");
 
-    try (InputStream inputStream = this.getClass().getResourceAsStream("/bigtest.nbt")) {
-      ByteBuf expected = this.readResource(Channels.newChannel(inputStream));
-      ByteBuf encoded = writer.getBuffer();
+    try {
+      writer.write(targetPath);
 
-      Assert.assertArrayEquals(this.toArray(expected), this.toArray(encoded));
+      try (InputStream inputStream = this.getClass().getResourceAsStream("/bigtest.nbt")) {
+        ByteBuf expected = this.readResource(Channels.newChannel(inputStream));
+        ByteBuf encoded = writer.getBuffer();
+
+        Assert.assertArrayEquals(this.toArray(expected), this.toArray(encoded));
+      }
+    } finally {
+      Files.deleteIfExists(targetPath);
     }
   }
 
