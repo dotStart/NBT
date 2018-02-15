@@ -73,7 +73,7 @@ public class ListTag<T extends Tag> implements Iterable<T>, Tag {
   }
 
   private void cleanup() {
-    if (this.elements.size() == 0) {
+    if (this.elements.isEmpty()) {
       this.type = TagType.END;
     }
   }
