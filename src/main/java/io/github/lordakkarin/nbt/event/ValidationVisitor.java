@@ -203,7 +203,7 @@ public class ValidationVisitor extends AbstractTagVisitor {
    */
   @Override
   public void visitRoot(@NonNull String name) {
-    if (this.stack.size() != 0) {
+    if (!this.stack.isEmpty()) {
       throw new IllegalStateException("Unexpected root tag");
     }
 
