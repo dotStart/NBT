@@ -6,6 +6,8 @@ import java.util.Objects;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
+ * Represents an NBT tag which contains an arbitrarily sized character sequence.
+ *
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
 public class StringTag implements Tag {

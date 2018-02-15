@@ -1,11 +1,13 @@
 package io.github.lordakkarin.nbt.tree;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import io.github.lordakkarin.nbt.event.TagType;
 import io.github.lordakkarin.nbt.event.TagVisitor;
 import java.util.Objects;
-import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
+ * Represents an NBT tag which contains a single short value.
+ *
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
 public class ShortTag implements Tag {

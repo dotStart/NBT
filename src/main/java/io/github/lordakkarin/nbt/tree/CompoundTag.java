@@ -1,5 +1,7 @@
 package io.github.lordakkarin.nbt.tree;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import io.github.lordakkarin.nbt.event.TagType;
 import io.github.lordakkarin.nbt.event.TagVisitor;
 import java.util.HashMap;
@@ -8,10 +10,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
-import edu.umd.cs.findbugs.annotations.NonNull;
-import edu.umd.cs.findbugs.annotations.Nullable;
 
 /**
+ * Represents an NBT tag which contains multiple named tags (e.g. it acts like a dictionary of
+ * values).
+ *
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
 public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {

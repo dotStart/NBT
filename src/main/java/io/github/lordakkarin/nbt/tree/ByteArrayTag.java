@@ -1,12 +1,14 @@
 package io.github.lordakkarin.nbt.tree;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import io.github.lordakkarin.nbt.event.TagType;
 import io.github.lordakkarin.nbt.event.TagVisitor;
 import java.util.Arrays;
 import java.util.Iterator;
-import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
+ * Represents an NBT tag which contains an arbitrary set of byte values.
+ *
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
 public class ByteArrayTag implements Iterable<Byte>, Tag {
