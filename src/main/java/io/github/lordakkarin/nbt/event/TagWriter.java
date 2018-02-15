@@ -54,7 +54,7 @@ public class TagWriter extends AbstractTagVisitor {
    */
   @NonNull
   public ByteBuf getBuffer() {
-    return new ReadOnlyByteBuf(this.buffer);
+    return this.buffer.asReadOnly();
   }
 
   /**
