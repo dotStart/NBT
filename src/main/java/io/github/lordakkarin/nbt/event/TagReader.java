@@ -104,18 +104,6 @@ public class TagReader {
   }
 
   /**
-   * Sets the byte order the reader will use for multi-byte values.
-   *
-   * <strong>Note:</strong> Call this before accessing {@link #accept(TagVisitor)} in case you are
-   * working with NBT which is compatible with the mobile version.
-   *
-   * @param order a byte order.
-   */
-  public void setOrder(@NonNull ByteOrder order) {
-    this.buffer.order(order);
-  }
-
-  /**
    * Visits the raw value based on a given type.
    *
    * @param visitor a visitor.
