@@ -37,7 +37,7 @@ Usage
 <dependency>
         <groupId>io.github.lordakkarin</groupId>
         <artifactId>nbt</artifactId>
-        <version>1.0</version>
+        <version>1.1.0</version>
 </dependency>
 ```
 
