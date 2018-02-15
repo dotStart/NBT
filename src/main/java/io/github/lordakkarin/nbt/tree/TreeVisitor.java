@@ -4,10 +4,8 @@ import io.github.lordakkarin.nbt.event.AbstractTagVisitor;
 import io.github.lordakkarin.nbt.event.TagType;
 import io.github.lordakkarin.nbt.event.TagVisitor;
 import java.util.Stack;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.NotThreadSafe;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 
 /**
  * Provides a visitor which is capable of converting the inputs from types like {@link
@@ -15,7 +13,6 @@ import javax.annotation.concurrent.NotThreadSafe;
  *
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
-@NotThreadSafe
 public class TreeVisitor extends AbstractTagVisitor {
 
   private final Stack<ParentNode> stack = new Stack<>();
@@ -40,7 +37,7 @@ public class TreeVisitor extends AbstractTagVisitor {
    * @param tag a tag.
    */
   @SuppressWarnings("unchecked")
-  private void pushTag(@Nonnull Tag tag) {
+  private void pushTag(@NonNull Tag tag) {
     if (this.stack.isEmpty()) {
       return;
     }
@@ -67,7 +64,7 @@ public class TreeVisitor extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitByteArray(@Nonnegative int length) {
+  public void visitByteArray(int length) {
     ByteArrayTag tag = new ByteArrayTag(new byte[length]);
 
     this.pushTag(tag);
@@ -135,7 +132,7 @@ public class TreeVisitor extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitIntegerArray(@Nonnegative int length) {
+  public void visitIntegerArray(int length) {
     IntegerArrayTag tag = new IntegerArrayTag(new int[length]);
 
     this.pushTag(tag);
@@ -148,7 +145,7 @@ public class TreeVisitor extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitKey(@Nonnull String name) {
+  public void visitKey(@NonNull String name) {
     if (!this.stack.isEmpty()) {
       ParentNode node = this.stack.peek();
 
@@ -164,7 +161,7 @@ public class TreeVisitor extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitList(@Nullable TagType type, @Nonnegative int length) {
+  public void visitList(@Nullable TagType type, int length) {
     ListTag tag = new ListTag((type == null ? TagType.END : type));
 
     this.pushTag(tag);
@@ -187,7 +184,7 @@ public class TreeVisitor extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitRoot(@Nonnull String name) {
+  public void visitRoot(@NonNull String name) {
     this.root = new RootTag(name);
     this.stack.push(new CompoundParentNode(this.root));
 
@@ -208,7 +205,7 @@ public class TreeVisitor extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitString(@Nonnull String value) {
+  public void visitString(@NonNull String value) {
     this.pushTag(new StringTag(value));
 
     super.visitString(value);
@@ -222,7 +219,7 @@ public class TreeVisitor extends AbstractTagVisitor {
 
     boolean needsPop();
 
-    void push(@Nonnull Tag tag);
+    void push(@NonNull Tag tag);
   }
 
   private abstract class ArrayParentNode implements ParentNode {
@@ -246,7 +243,7 @@ public class TreeVisitor extends AbstractTagVisitor {
      * {@inheritDoc}
      */
     @Override
-    public void push(@Nonnull Tag tag) {
+    public void push(@NonNull Tag tag) {
       ++this.index;
     }
   }
@@ -255,7 +252,7 @@ public class TreeVisitor extends AbstractTagVisitor {
 
     private final ByteArrayTag tag;
 
-    public ByteArrayParentNode(@Nonnull ByteArrayTag tag) {
+    public ByteArrayParentNode(@NonNull ByteArrayTag tag) {
       super(tag.getLength());
       this.tag = tag;
     }
@@ -264,7 +261,7 @@ public class TreeVisitor extends AbstractTagVisitor {
      * {@inheritDoc}
      */
     @Override
-    public void push(@Nonnull Tag tag) {
+    public void push(@NonNull Tag tag) {
       if (!(tag instanceof ByteTag)) {
         throw new IllegalStateException(
             "Could not push " + tag.getClass() + " to end of byte array: Invalid tag type");
@@ -280,7 +277,7 @@ public class TreeVisitor extends AbstractTagVisitor {
     private final CompoundTag tag;
     private String key = null;
 
-    public CompoundParentNode(@Nonnull CompoundTag tag) {
+    public CompoundParentNode(@NonNull CompoundTag tag) {
       this.tag = tag;
     }
 
@@ -296,7 +293,7 @@ public class TreeVisitor extends AbstractTagVisitor {
      * {@inheritDoc}
      */
     @Override
-    public void push(@Nonnull Tag tag) {
+    public void push(@NonNull Tag tag) {
       if (this.key == null) {
         throw new IllegalArgumentException(
             "Could not push " + tag.getClass() + " to end of compound: No key specified");
@@ -310,7 +307,7 @@ public class TreeVisitor extends AbstractTagVisitor {
 
     private final IntegerArrayTag tag;
 
-    public IntegerArrayParentNode(@Nonnull IntegerArrayTag tag) {
+    public IntegerArrayParentNode(@NonNull IntegerArrayTag tag) {
       super(tag.getLength());
       this.tag = tag;
     }
@@ -319,7 +316,7 @@ public class TreeVisitor extends AbstractTagVisitor {
      * {@inheritDoc}
      */
     @Override
-    public void push(@Nonnull Tag tag) {
+    public void push(@NonNull Tag tag) {
       if (!(tag instanceof IntegerTag)) {
         throw new IllegalArgumentException(
             "Could not push " + tag.getClass() + " to end of array: Invalid tag type");
@@ -334,7 +331,7 @@ public class TreeVisitor extends AbstractTagVisitor {
 
     private final ListTag tag;
 
-    public ListParentNode(@Nonnegative int length, @Nonnull ListTag tag) {
+    public ListParentNode(int length, @NonNull ListTag tag) {
       super(length);
       this.tag = tag;
     }
@@ -344,7 +341,7 @@ public class TreeVisitor extends AbstractTagVisitor {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public void push(@Nonnull Tag tag) {
+    public void push(@NonNull Tag tag) {
       this.tag.add(tag);
       super.push(tag);
     }

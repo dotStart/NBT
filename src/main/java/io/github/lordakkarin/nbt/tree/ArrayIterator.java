@@ -1,7 +1,7 @@
 package io.github.lordakkarin.nbt.tree;
 
 import java.util.Iterator;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * Provides an iterator implementation which is capable of iterating over arrays directly.
@@ -13,11 +13,11 @@ class ArrayIterator<E> implements Iterator<E> {
   private final E[] array;
   private int index;
 
-  ArrayIterator(@Nonnull E[] array) {
+  ArrayIterator(@NonNull E[] array) {
     this.array = array;
   }
 
-  public static <E> ArrayIterator<E> of(@Nonnull E[] array) {
+  public static <E> ArrayIterator<E> of(@NonNull E[] array) {
     return new ArrayIterator<>(array);
   }
 

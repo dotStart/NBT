@@ -3,13 +3,11 @@ package io.github.lordakkarin.nbt.tree;
 import io.github.lordakkarin.nbt.event.TagType;
 import io.github.lordakkarin.nbt.event.TagVisitor;
 import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.NotThreadSafe;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
-@NotThreadSafe
 public class StringTag implements Tag {
 
   private String value;
@@ -26,7 +24,7 @@ public class StringTag implements Tag {
    * {@inheritDoc}
    */
   @Override
-  public void accept(@Nonnull TagVisitor visitor) {
+  public void accept(@NonNull TagVisitor visitor) {
     visitor.visitString(this.value);
   }
 
@@ -49,18 +47,18 @@ public class StringTag implements Tag {
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
   public TagType getType() {
     return TagType.STRING;
   }
 
-  @Nonnull
+  @NonNull
   public String getValue() {
     return this.value;
   }
 
-  public void setValue(@Nonnull String value) {
+  public void setValue(@NonNull String value) {
     this.value = value;
   }
 

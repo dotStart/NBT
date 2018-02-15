@@ -4,14 +4,11 @@ import io.github.lordakkarin.nbt.event.TagType;
 import io.github.lordakkarin.nbt.event.TagVisitor;
 import java.util.Arrays;
 import java.util.Iterator;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.NotThreadSafe;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
-@NotThreadSafe
 public class IntegerArrayTag implements Iterable<Integer>, Tag {
 
   private int[] value;
@@ -28,7 +25,7 @@ public class IntegerArrayTag implements Iterable<Integer>, Tag {
    * {@inheritDoc}
    */
   @Override
-  public void accept(@Nonnull TagVisitor visitor) {
+  public void accept(@NonNull TagVisitor visitor) {
     visitor.visitIntegerArray(this.value.length);
 
     for (int value : this.value) {
@@ -52,11 +49,10 @@ public class IntegerArrayTag implements Iterable<Integer>, Tag {
     return Arrays.equals(this.value, that.value);
   }
 
-  public int get(@Nonnegative int index) {
+  public int get(int index) {
     return this.value[index];
   }
 
-  @Nonnegative
   public int getLength() {
     return this.value.length;
   }
@@ -64,18 +60,18 @@ public class IntegerArrayTag implements Iterable<Integer>, Tag {
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
   public TagType getType() {
     return TagType.INTEGER_ARRAY;
   }
 
-  @Nonnull
+  @NonNull
   public int[] getValue() {
     return this.value;
   }
 
-  public void setValue(@Nonnull int[] value) {
+  public void setValue(@NonNull int[] value) {
     this.value = value;
   }
 
@@ -101,7 +97,7 @@ public class IntegerArrayTag implements Iterable<Integer>, Tag {
     return new ArrayIterator<>(obj);
   }
 
-  public void set(@Nonnegative int index, int value) {
+  public void set(int index, int value) {
     this.value[index] = value;
   }
 }

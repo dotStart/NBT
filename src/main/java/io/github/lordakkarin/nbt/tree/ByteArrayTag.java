@@ -4,14 +4,11 @@ import io.github.lordakkarin.nbt.event.TagType;
 import io.github.lordakkarin.nbt.event.TagVisitor;
 import java.util.Arrays;
 import java.util.Iterator;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.NotThreadSafe;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
-@NotThreadSafe
 public class ByteArrayTag implements Iterable<Byte>, Tag {
 
   private byte[] value;
@@ -20,7 +17,7 @@ public class ByteArrayTag implements Iterable<Byte>, Tag {
     this.value = new byte[0];
   }
 
-  public ByteArrayTag(@Nonnull byte[] value) {
+  public ByteArrayTag(@NonNull byte[] value) {
     this.value = value;
   }
 
@@ -28,7 +25,7 @@ public class ByteArrayTag implements Iterable<Byte>, Tag {
    * {@inheritDoc}
    */
   @Override
-  public void accept(@Nonnull TagVisitor visitor) {
+  public void accept(@NonNull TagVisitor visitor) {
     visitor.visitByteArray(this.value.length);
 
     for (byte value : this.value) {
@@ -52,11 +49,10 @@ public class ByteArrayTag implements Iterable<Byte>, Tag {
     return Arrays.equals(this.value, that.value);
   }
 
-  public byte get(@Nonnegative int index) {
+  public byte get(int index) {
     return this.value[index];
   }
 
-  @Nonnegative
   public int getLength() {
     return this.value.length;
   }
@@ -64,18 +60,18 @@ public class ByteArrayTag implements Iterable<Byte>, Tag {
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
   public TagType getType() {
     return TagType.BYTE_ARRAY;
   }
 
-  @Nonnull
+  @NonNull
   public byte[] getValue() {
     return this.value;
   }
 
-  public void setValue(@Nonnull byte[] value) {
+  public void setValue(@NonNull byte[] value) {
     this.value = value;
   }
 
@@ -101,7 +97,7 @@ public class ByteArrayTag implements Iterable<Byte>, Tag {
     return new ArrayIterator<>(obj);
   }
 
-  public void set(@Nonnegative int index, byte value) {
+  public void set(int index, byte value) {
     this.value[index] = value;
   }
 }

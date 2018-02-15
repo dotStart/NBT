@@ -1,17 +1,14 @@
 package io.github.lordakkarin.nbt.event;
 
 import java.util.Stack;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.NotThreadSafe;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 
 /**
  * Provides a visitor which validates the structure of the passed data against format conventions.
  *
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
-@NotThreadSafe
 public class ValidationVisitor extends AbstractTagVisitor {
 
   private final Stack<Integer> listCounter = new Stack<>();
@@ -37,7 +34,7 @@ public class ValidationVisitor extends AbstractTagVisitor {
     }
   }
 
-  private void verifyValue(@Nonnull TagType type) {
+  private void verifyValue(@NonNull TagType type) {
     if (!this.stack.isEmpty()) {
       TagType parent = this.stack.peek();
 
@@ -93,7 +90,7 @@ public class ValidationVisitor extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitByteArray(@Nonnegative int length) {
+  public void visitByteArray(int length) {
     this.verifyValue(TagType.BYTE_ARRAY);
     this.stack.push(TagType.BYTE_ARRAY);
     this.listCounter.push(length);
@@ -160,7 +157,7 @@ public class ValidationVisitor extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitIntegerArray(@Nonnegative int length) {
+  public void visitIntegerArray(int length) {
     this.verifyValue(TagType.BYTE_ARRAY);
     this.stack.push(TagType.INTEGER_ARRAY);
     this.listCounter.push(length);
@@ -172,7 +169,7 @@ public class ValidationVisitor extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitKey(@Nonnull String name) {
+  public void visitKey(@NonNull String name) {
     this.key = name;
 
     super.visitKey(name);
@@ -182,7 +179,7 @@ public class ValidationVisitor extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitList(@Nullable TagType type, @Nonnegative int length) {
+  public void visitList(@Nullable TagType type, int length) {
     this.verifyValue(TagType.LIST);
     this.stack.push(TagType.LIST);
     this.listType.push(type);
@@ -205,7 +202,7 @@ public class ValidationVisitor extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitRoot(@Nonnull String name) {
+  public void visitRoot(@NonNull String name) {
     if (this.stack.size() != 0) {
       throw new IllegalStateException("Unexpected root tag");
     }
@@ -230,7 +227,7 @@ public class ValidationVisitor extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitString(@Nonnull String value) {
+  public void visitString(@NonNull String value) {
     this.verifyValue(TagType.STRING);
 
     super.visitString(value);

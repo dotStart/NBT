@@ -14,11 +14,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Stack;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.WillNotClose;
-import javax.annotation.concurrent.NotThreadSafe;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 
 /**
  * Accepts the data from a {@link TagReader} or other visitor and turns it into an NBT encoded (and
@@ -26,7 +23,6 @@ import javax.annotation.concurrent.NotThreadSafe;
  *
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
-@NotThreadSafe
 public class TagWriter extends AbstractTagVisitor {
 
   private final ByteBuf buffer;
@@ -56,7 +52,7 @@ public class TagWriter extends AbstractTagVisitor {
    *
    * @return a buffer.
    */
-  @Nonnull
+  @NonNull
   public ByteBuf getBuffer() {
     return new ReadOnlyByteBuf(this.buffer);
   }
@@ -76,7 +72,7 @@ public class TagWriter extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitByteArray(@Nonnegative int length) {
+  public void visitByteArray(int length) {
     this.writeType(TagType.BYTE_ARRAY);
     this.buffer.writeInt(length);
 
@@ -147,7 +143,7 @@ public class TagWriter extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitIntegerArray(@Nonnegative int length) {
+  public void visitIntegerArray(int length) {
     this.writeType(TagType.INTEGER_ARRAY);
     this.buffer.writeInt(length);
 
@@ -161,7 +157,7 @@ public class TagWriter extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitKey(@Nonnull String name) {
+  public void visitKey(@NonNull String name) {
     this.key = name;
 
     super.visitKey(name);
@@ -171,7 +167,7 @@ public class TagWriter extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitList(@Nullable TagType type, @Nonnegative int length) {
+  public void visitList(@Nullable TagType type, int length) {
     this.writeType(TagType.LIST);
     this.buffer.writeByte((type == null ? TagType.END : type).ordinal());
     this.buffer.writeInt(length);
@@ -197,7 +193,7 @@ public class TagWriter extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitRoot(@Nonnull String name) {
+  public void visitRoot(@NonNull String name) {
     this.writeType(TagType.COMPOUND);
     this.writeString(name);
     this.parentStack.push(TagType.COMPOUND);
@@ -220,7 +216,7 @@ public class TagWriter extends AbstractTagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitString(@Nonnull String value) {
+  public void visitString(@NonNull String value) {
     this.writeType(TagType.STRING);
     this.writeString(value);
 
@@ -233,7 +229,7 @@ public class TagWriter extends AbstractTagVisitor {
    * @param channel a channel.
    * @throws IOException when writing fails.
    */
-  public void write(@Nonnull @WillNotClose WritableByteChannel channel) throws IOException {
+  public void write(@NonNull WritableByteChannel channel) throws IOException {
     // we are ignoring the first and the last byte in the buffer since they will consist of the
     // implied root compound tag
     ByteBuffer tmp = ByteBuffer.allocate(this.buffer.readableBytes());
@@ -256,7 +252,7 @@ public class TagWriter extends AbstractTagVisitor {
    * @param outputStream a stream.
    * @throws IOException when writing fails.
    */
-  public void write(@Nonnull @WillNotClose OutputStream outputStream) throws IOException {
+  public void write(@NonNull OutputStream outputStream) throws IOException {
     this.write(Channels.newChannel(outputStream));
   }
 
@@ -267,7 +263,7 @@ public class TagWriter extends AbstractTagVisitor {
    * @param path a file path.
    * @throws IOException when writing fails.
    */
-  public void write(@Nonnull Path path) throws IOException {
+  public void write(@NonNull Path path) throws IOException {
     try (FileChannel channel = FileChannel
         .open(path, StandardOpenOption.CREATE, StandardOpenOption.WRITE,
             StandardOpenOption.TRUNCATE_EXISTING)) {
@@ -282,7 +278,7 @@ public class TagWriter extends AbstractTagVisitor {
    * @param file a file.
    * @throws IOException when writing fails.
    */
-  public void write(@Nonnull File file) throws IOException {
+  public void write(@NonNull File file) throws IOException {
     this.write(file.toPath());
   }
 
@@ -291,7 +287,7 @@ public class TagWriter extends AbstractTagVisitor {
    *
    * @param value a string value.
    */
-  private void writeString(@Nonnull String value) {
+  private void writeString(@NonNull String value) {
     byte[] encoded = value.getBytes(StandardCharsets.UTF_8);
 
     this.buffer.writeShort(encoded.length);
@@ -303,7 +299,7 @@ public class TagWriter extends AbstractTagVisitor {
    *
    * @param type a type.
    */
-  private void writeType(@Nonnull TagType type) {
+  private void writeType(@NonNull TagType type) {
     // lists are prefixed with their respective tagId and thus we'll skip writing the tagId
     // until we have fully written the list
     TagType parentType = (this.parentStack.isEmpty() ? TagType.COMPOUND : this.parentStack.peek());

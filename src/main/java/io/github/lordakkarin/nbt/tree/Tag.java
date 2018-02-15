@@ -2,7 +2,7 @@ package io.github.lordakkarin.nbt.tree;
 
 import io.github.lordakkarin.nbt.event.TagType;
 import io.github.lordakkarin.nbt.event.TagVisitor;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * Represents a basic NBT tag.
@@ -16,13 +16,13 @@ public interface Tag {
    *
    * @param visitor a visitor.
    */
-  void accept(@Nonnull TagVisitor visitor);
+  void accept(@NonNull TagVisitor visitor);
 
   /**
    * Retrieves the tag's type.
    *
    * @return a type.
    */
-  @Nonnull
+  @NonNull
   TagType getType();
 }

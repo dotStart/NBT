@@ -13,9 +13,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import javax.annotation.Nonnull;
-import javax.annotation.WillNotClose;
-import javax.annotation.concurrent.NotThreadSafe;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * Reads an NBT encoded (and optionally gzipped) stream of data and passes it to one or more
@@ -23,12 +21,11 @@ import javax.annotation.concurrent.NotThreadSafe;
  *
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
-@NotThreadSafe
 public class TagReader {
 
   private final ByteBuf buffer;
 
-  public TagReader(@Nonnull @WillNotClose ReadableByteChannel channel) throws IOException {
+  public TagReader(@NonNull ReadableByteChannel channel) throws IOException {
     this.buffer = Unpooled.directBuffer();
 
     {
@@ -46,15 +43,15 @@ public class TagReader {
     }
   }
 
-  public TagReader(@Nonnull @WillNotClose InputStream inputStream) throws IOException {
+  public TagReader(@NonNull InputStream inputStream) throws IOException {
     this(Channels.newChannel(inputStream));
   }
 
-  public TagReader(@Nonnull Path path) throws IOException {
+  public TagReader(@NonNull Path path) throws IOException {
     this(FileChannel.open(path, StandardOpenOption.READ));
   }
 
-  public TagReader(@Nonnull File file) throws IOException {
+  public TagReader(@NonNull File file) throws IOException {
     this(file.toPath());
   }
 
@@ -63,7 +60,7 @@ public class TagReader {
    *
    * @param visitor a visitor.
    */
-  public void accept(@Nonnull TagVisitor visitor) {
+  public void accept(@NonNull TagVisitor visitor) {
     this.buffer.markReaderIndex();
 
     try {
@@ -96,7 +93,7 @@ public class TagReader {
    *
    * @return a string.
    */
-  @Nonnull
+  @NonNull
   private String readString() {
     int length = this.buffer.readUnsignedShort();
 
@@ -114,7 +111,7 @@ public class TagReader {
    *
    * @param order a byte order.
    */
-  public void setOrder(@Nonnull ByteOrder order) {
+  public void setOrder(@NonNull ByteOrder order) {
     this.buffer.order(order);
   }
 
@@ -124,7 +121,7 @@ public class TagReader {
    * @param visitor a visitor.
    * @param tagType a tag type.
    */
-  private void visitValue(@Nonnull TagVisitor visitor, @Nonnull TagType tagType) {
+  private void visitValue(@NonNull TagVisitor visitor, @NonNull TagType tagType) {
     switch (tagType) {
       case BYTE:
         visitor.visitByte(this.buffer.readByte());

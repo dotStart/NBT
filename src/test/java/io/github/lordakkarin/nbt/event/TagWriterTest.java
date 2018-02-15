@@ -8,8 +8,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Paths;
-import javax.annotation.Nonnull;
-import javax.annotation.WillNotClose;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,8 +19,8 @@ import org.junit.Test;
  */
 public class TagWriterTest {
 
-  @Nonnull
-  private ByteBuf readResource(@Nonnull @WillNotClose ReadableByteChannel channel)
+  @NonNull
+  private ByteBuf readResource(@NonNull ReadableByteChannel channel)
       throws IOException {
     ByteBuf target = Unpooled.directBuffer();
 
@@ -86,8 +85,8 @@ public class TagWriterTest {
     }
   }
 
-  @Nonnull
-  private byte[] toArray(@Nonnull ByteBuf buffer) {
+  @NonNull
+  private byte[] toArray(@NonNull ByteBuf buffer) {
     byte[] array = new byte[buffer.readableBytes()];
     buffer.readBytes(array);
 

@@ -1,8 +1,7 @@
 package io.github.lordakkarin.nbt.event;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 
 /**
  * Provides a basic visitor which is capable of receiving events from a {@link TagReader} or another
@@ -14,7 +13,7 @@ public interface TagVisitor {
 
   void visitByte(byte value);
 
-  void visitByteArray(@Nonnegative int length);
+  void visitByteArray(int length);
 
   void visitCompound();
 
@@ -26,17 +25,17 @@ public interface TagVisitor {
 
   void visitInteger(int value);
 
-  void visitIntegerArray(@Nonnegative int length);
+  void visitIntegerArray(int length);
 
-  void visitKey(@Nonnull String name);
+  void visitKey(@NonNull String name);
 
-  void visitList(@Nullable TagType type, @Nonnegative int length);
+  void visitList(@Nullable TagType type, int length);
 
   void visitLong(long value);
 
-  void visitRoot(@Nonnull String name);
+  void visitRoot(@NonNull String name);
 
   void visitShort(short value);
 
-  void visitString(@Nonnull String value);
+  void visitString(@NonNull String value);
 }

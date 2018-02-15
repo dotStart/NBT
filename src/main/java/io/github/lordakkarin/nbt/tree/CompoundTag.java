@@ -8,15 +8,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.NotThreadSafe;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 
 /**
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
-@NotThreadSafe
 public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
 
   private final Map<String, Tag> map = new HashMap<>();
@@ -24,7 +21,7 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
   public CompoundTag() {
   }
 
-  public CompoundTag(@Nonnull Map<String, ? extends Tag> elements) {
+  public CompoundTag(@NonNull Map<String, ? extends Tag> elements) {
     this.putAll(elements);
   }
 
@@ -32,7 +29,7 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
    * {@inheritDoc}
    */
   @Override
-  public void accept(@Nonnull TagVisitor visitor) {
+  public void accept(@NonNull TagVisitor visitor) {
     visitor.visitCompound();
     this.map.forEach((k, v) -> {
       visitor.visitKey(k);
@@ -45,16 +42,16 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
     this.map.clear();
   }
 
-  public void computeIfAbsent(@Nonnull String key,
-      @Nonnull Function<String, ? extends Tag> factory) {
+  public void computeIfAbsent(@NonNull String key,
+      @NonNull Function<String, ? extends Tag> factory) {
     this.map.computeIfAbsent(key, factory);
   }
 
-  public boolean containsKey(@Nonnull String key) {
+  public boolean containsKey(@NonNull String key) {
     return this.map.containsKey(key);
   }
 
-  public boolean containsKey(@Nonnull String key, @Nonnull Class<? extends Tag> type) {
+  public boolean containsKey(@NonNull String key, @NonNull Class<? extends Tag> type) {
     Tag tag = this.get(key);
 
     if (tag == null) {
@@ -82,39 +79,39 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
 
   @Nullable
   @SuppressWarnings("unchecked")
-  public <T extends Tag> T get(@Nonnull String key) {
+  public <T extends Tag> T get(@NonNull String key) {
     return (T) this.map.get(key);
   }
 
-  public byte getByte(@Nonnull String key) {
+  public byte getByte(@NonNull String key) {
     return Optional.ofNullable((ByteTag) this.get(key)).map(ByteTag::getValue).orElse((byte) 0);
   }
 
   @Nullable
-  public byte[] getByteArray(@Nonnull String key) {
+  public byte[] getByteArray(@NonNull String key) {
     return Optional.ofNullable((ByteArrayTag) this.get(key)).map(ByteArrayTag::getValue)
         .orElse(null);
   }
 
-  public double getDouble(@Nonnull String key) {
+  public double getDouble(@NonNull String key) {
     return Optional.ofNullable((DoubleTag) this.get(key)).map(DoubleTag::getValue).orElse(0d);
   }
 
-  public float getFloat(@Nonnull String key) {
+  public float getFloat(@NonNull String key) {
     return Optional.ofNullable((FloatTag) this.get(key)).map(FloatTag::getValue).orElse(0f);
   }
 
-  public int getInteger(@Nonnull String key) {
+  public int getInteger(@NonNull String key) {
     return Optional.ofNullable((IntegerTag) this.get(key)).map(IntegerTag::getValue).orElse(0);
   }
 
   @Nullable
-  public int[] getIntegerArray(@Nonnull String key) {
+  public int[] getIntegerArray(@NonNull String key) {
     return Optional.ofNullable((IntegerArrayTag) this.get(key)).map(IntegerArrayTag::getValue)
         .orElse(null);
   }
 
-  public long getLong(@Nonnull String key) {
+  public long getLong(@NonNull String key) {
     return Optional.ofNullable((LongTag) this.get(key)).map(LongTag::getValue).orElse(0L);
   }
 
@@ -126,8 +123,8 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
    * @param <T> a type.
    * @return a tag.
    */
-  @Nonnull
-  private <T extends Tag> T getOrCreate(@Nonnull String key, @Nonnull Class<T> type) {
+  @NonNull
+  private <T extends Tag> T getOrCreate(@NonNull String key, @NonNull Class<T> type) {
     if (!this.containsKey(key, type)) {
       try {
         T instance = type.newInstance();
@@ -144,23 +141,23 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
 
   @Nullable
   @SuppressWarnings("unchecked")
-  public <T extends Tag> T getOrDefault(@Nonnull String key, @Nullable T defaultValue) {
+  public <T extends Tag> T getOrDefault(@NonNull String key, @Nullable T defaultValue) {
     return (T) this.map.getOrDefault(key, defaultValue);
   }
 
-  public short getShort(@Nonnull String key) {
+  public short getShort(@NonNull String key) {
     return Optional.ofNullable((ShortTag) this.get(key)).map(ShortTag::getValue).orElse((short) 0);
   }
 
   @Nullable
-  public String getString(@Nonnull String key) {
+  public String getString(@NonNull String key) {
     return Optional.ofNullable((StringTag) this.get(key)).map(StringTag::getValue).orElse(null);
   }
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
   public TagType getType() {
     return TagType.COMPOUND;
@@ -182,65 +179,64 @@ public class CompoundTag implements Iterable<Map.Entry<String, Tag>>, Tag {
     return this.map.entrySet().iterator();
   }
 
-  public void put(@Nonnull String key, @Nonnull Tag tag) {
+  public void put(@NonNull String key, @NonNull Tag tag) {
     this.map.put(key, tag);
   }
 
-  public void putAll(@Nonnull Map<String, ? extends Tag> elements) {
+  public void putAll(@NonNull Map<String, ? extends Tag> elements) {
     this.map.putAll(elements);
   }
 
-  public void putIfAbsent(@Nonnull String key, @Nonnull Tag tag) {
+  public void putIfAbsent(@NonNull String key, @NonNull Tag tag) {
     this.map.putIfAbsent(key, tag);
   }
 
-  @Nonnull
+  @NonNull
   @SuppressWarnings("unchecked")
-  public <T extends Tag> T remove(@Nonnull String key) {
+  public <T extends Tag> T remove(@NonNull String key) {
     return (T) this.map.remove(key);
   }
 
-  public boolean remove(@Nonnull String key, @Nonnull Tag tag) {
+  public boolean remove(@NonNull String key, @NonNull Tag tag) {
     return this.map.remove(key, tag);
   }
 
-  public void setByte(@Nonnull String key, byte value) {
+  public void setByte(@NonNull String key, byte value) {
     this.getOrCreate(key, ByteTag.class).setValue(value);
   }
 
-  public void setByteArray(@Nonnull String key, @Nonnull byte[] value) {
+  public void setByteArray(@NonNull String key, @NonNull byte[] value) {
     this.getOrCreate(key, ByteArrayTag.class).setValue(value);
   }
 
-  public void setDouble(@Nonnull String key, double value) {
+  public void setDouble(@NonNull String key, double value) {
     this.getOrCreate(key, DoubleTag.class).setValue(value);
   }
 
-  public void setFloat(@Nonnull String key, float value) {
+  public void setFloat(@NonNull String key, float value) {
     this.getOrCreate(key, FloatTag.class).setValue(value);
   }
 
-  public void setInteger(@Nonnull String key, int value) {
+  public void setInteger(@NonNull String key, int value) {
     this.getOrCreate(key, IntegerTag.class).setValue(value);
   }
 
-  public void setIntegerArray(@Nonnull String key, @Nonnull int[] value) {
+  public void setIntegerArray(@NonNull String key, @NonNull int[] value) {
     this.getOrCreate(key, IntegerArrayTag.class).setValue(value);
   }
 
-  public void setLong(@Nonnull String key, long value) {
+  public void setLong(@NonNull String key, long value) {
     this.getOrCreate(key, LongTag.class).setValue(value);
   }
 
-  public void setShort(@Nonnull String key, short value) {
+  public void setShort(@NonNull String key, short value) {
     this.getOrCreate(key, ShortTag.class).setValue(value);
   }
 
-  public void setString(@Nonnull String key, @Nonnull String value) {
+  public void setString(@NonNull String key, @NonNull String value) {
     this.getOrCreate(key, StringTag.class).setValue(value);
   }
 
-  @Nonnegative
   public int size() {
     return this.map.size();
   }

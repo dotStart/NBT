@@ -1,7 +1,6 @@
 package io.github.lordakkarin.nbt.event;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * Provides a list of valid NBT tag types and their respective serialized identifiers.
@@ -29,8 +28,8 @@ public enum TagType {
    * @return a tag type.
    * @throws IndexOutOfBoundsException when the specified tagId is out of bounds.
    */
-  @Nonnull
-  public static TagType byTypeId(@Nonnegative int typeId) {
+  @NonNull
+  public static TagType byTypeId(int typeId) {
     TagType[] types = values();
 
     if (typeId >= types.length) {

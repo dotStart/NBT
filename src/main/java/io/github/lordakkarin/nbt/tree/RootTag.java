@@ -3,7 +3,7 @@ package io.github.lordakkarin.nbt.tree;
 import io.github.lordakkarin.nbt.event.TagVisitor;
 import java.util.Map;
 import java.util.Objects;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * Provides a root NBT tag which acts as the implied compound at the heart of the file.
@@ -14,18 +14,18 @@ public class RootTag extends CompoundTag {
 
   private String name;
 
-  public RootTag(@Nonnull String name) {
+  public RootTag(@NonNull String name) {
     super();
     this.name = name;
   }
 
-  public RootTag(@Nonnull String name, @Nonnull Map<String, ? extends Tag> elements) {
+  public RootTag(@NonNull String name, @NonNull Map<String, ? extends Tag> elements) {
     super(elements);
     this.name = name;
   }
 
   @Override
-  public void accept(@Nonnull TagVisitor visitor) {
+  public void accept(@NonNull TagVisitor visitor) {
     visitor.visitKey(this.name);
     super.accept(visitor);
   }
@@ -49,12 +49,12 @@ public class RootTag extends CompoundTag {
     return Objects.equals(this.name, entries.name);
   }
 
-  @Nonnull
+  @NonNull
   public String getName() {
     return this.name;
   }
 
-  public void setName(@Nonnull String name) {
+  public void setName(@NonNull String name) {
     this.name = name;
   }
 

@@ -9,14 +9,11 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.NotThreadSafe;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
-@NotThreadSafe
 public class ListTag<T extends Tag> implements Iterable<T>, Tag {
 
   private final List<T> elements = new ArrayList<>();
@@ -27,17 +24,17 @@ public class ListTag<T extends Tag> implements Iterable<T>, Tag {
     this(TagType.END);
   }
 
-  public ListTag(@Nonnull TagType type) {
+  public ListTag(@NonNull TagType type) {
     this.type = type;
   }
 
-  public ListTag(@Nonnull TagType type, @Nonnull T... elements) {
+  public ListTag(@NonNull TagType type, @NonNull T... elements) {
     this(type);
 
     this.addAll(Arrays.asList(elements));
   }
 
-  public ListTag(@Nonnull TagType type, @Nonnull Collection<? extends T> elements) {
+  public ListTag(@NonNull TagType type, @NonNull Collection<? extends T> elements) {
     this(type);
 
     this.addAll(elements);
@@ -47,12 +44,12 @@ public class ListTag<T extends Tag> implements Iterable<T>, Tag {
    * {@inheritDoc}
    */
   @Override
-  public void accept(@Nonnull TagVisitor visitor) {
+  public void accept(@NonNull TagVisitor visitor) {
     visitor.visitList(this.type, this.elements.size());
     this.elements.forEach((e) -> e.accept(visitor));
   }
 
-  public void add(@Nonnull T element) {
+  public void add(@NonNull T element) {
     if (this.type == TagType.END) {
       this.type = element.getType();
     }
@@ -65,11 +62,11 @@ public class ListTag<T extends Tag> implements Iterable<T>, Tag {
     this.elements.add(element);
   }
 
-  public void addAll(@Nonnull T... elements) {
+  public void addAll(@NonNull T... elements) {
     this.addAll(Arrays.asList(elements));
   }
 
-  public void addAll(@Nonnull Collection<? extends T> elements) {
+  public void addAll(@NonNull Collection<? extends T> elements) {
     elements.forEach(this::add);
   }
 
@@ -101,15 +98,15 @@ public class ListTag<T extends Tag> implements Iterable<T>, Tag {
         Objects.equals(this.elements, listTag.elements);
   }
 
-  @Nonnull
-  public T get(@Nonnegative int index) {
+  @NonNull
+  public T get(int index) {
     return this.elements.get(index);
   }
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
   public TagType getType() {
     return TagType.LIST;
@@ -131,26 +128,25 @@ public class ListTag<T extends Tag> implements Iterable<T>, Tag {
     return this.view.iterator();
   }
 
-  public void remove(@Nonnegative int index) {
+  public void remove(int index) {
     this.elements.remove(index);
     this.cleanup();
   }
 
-  public void remove(@Nonnull T element) {
+  public void remove(@NonNull T element) {
     this.elements.remove(element);
     this.cleanup();
   }
 
-  public void removeAll(@Nonnull T... elements) {
+  public void removeAll(@NonNull T... elements) {
     this.removeAll(Arrays.asList(elements));
   }
 
-  public void removeAll(@Nonnull Collection<? extends T> elements) {
+  public void removeAll(@NonNull Collection<? extends T> elements) {
     this.elements.removeAll(elements);
     this.cleanup();
   }
 
-  @Nonnegative
   public int size() {
     return this.elements.size();
   }

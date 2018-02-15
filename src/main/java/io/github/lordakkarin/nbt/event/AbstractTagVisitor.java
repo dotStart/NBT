@@ -1,11 +1,8 @@
 package io.github.lordakkarin.nbt.event;
 
 import java.util.Optional;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.Immutable;
-import javax.annotation.concurrent.ThreadSafe;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 
 /**
  * Provides an abstract visitor which is capable of passing all its values to the next visitor in a
@@ -13,8 +10,6 @@ import javax.annotation.concurrent.ThreadSafe;
  *
  * @author <a href="mailto:johannesd@torchmind.com">Johannes Donath</a>
  */
-@Immutable
-@ThreadSafe
 public abstract class AbstractTagVisitor implements TagVisitor {
 
   private final TagVisitor next;
@@ -28,7 +23,7 @@ public abstract class AbstractTagVisitor implements TagVisitor {
    *
    * @return a visitor.
    */
-  @Nonnull
+  @NonNull
   public Optional<TagVisitor> getNext() {
     return Optional.ofNullable(this.next);
   }
@@ -47,7 +42,7 @@ public abstract class AbstractTagVisitor implements TagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitByteArray(@Nonnegative int length) {
+  public void visitByteArray(int length) {
     if (this.next != null) {
       this.next.visitByteArray(length);
     }
@@ -107,7 +102,7 @@ public abstract class AbstractTagVisitor implements TagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitIntegerArray(@Nonnegative int length) {
+  public void visitIntegerArray(int length) {
     if (this.next != null) {
       this.next.visitIntegerArray(length);
     }
@@ -117,7 +112,7 @@ public abstract class AbstractTagVisitor implements TagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitKey(@Nonnull String name) {
+  public void visitKey(@NonNull String name) {
     if (this.next != null) {
       this.next.visitKey(name);
     }
@@ -127,7 +122,7 @@ public abstract class AbstractTagVisitor implements TagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitList(@Nullable TagType type, @Nonnegative int length) {
+  public void visitList(@Nullable TagType type, int length) {
     if (this.next != null) {
       this.next.visitList(type, length);
     }
@@ -147,7 +142,7 @@ public abstract class AbstractTagVisitor implements TagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitRoot(@Nonnull String name) {
+  public void visitRoot(@NonNull String name) {
     if (this.next != null) {
       this.next.visitRoot(name);
     }
@@ -167,7 +162,7 @@ public abstract class AbstractTagVisitor implements TagVisitor {
    * {@inheritDoc}
    */
   @Override
-  public void visitString(@Nonnull String value) {
+  public void visitString(@NonNull String value) {
     if (this.next != null) {
       this.next.visitString(value);
     }
