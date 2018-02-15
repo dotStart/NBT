@@ -21,7 +21,7 @@ Table of Contents
 Contacts
 --------
 
-* [IRC #Akkarin on EsperNet](http://webchat.esper.net/?channels=Akkarin)
+* [#.start](http://webchat.esper.net/?channels=.start&prompt=1) on EsperNet
 * [GitHub](https://github.com/dotStart/NBT)
 
 License
