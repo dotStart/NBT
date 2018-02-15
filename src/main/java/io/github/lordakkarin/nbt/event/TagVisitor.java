@@ -12,31 +12,31 @@ import javax.annotation.Nullable;
  */
 public interface TagVisitor {
 
-    void visitByte(byte value);
+  void visitByte(byte value);
 
-    void visitShort(short value);
+  void visitByteArray(@Nonnegative int length);
 
-    void visitInteger(int value);
+  void visitCompound();
 
-    void visitLong(long value);
+  void visitCompoundEnd();
 
-    void visitFloat(float value);
+  void visitDouble(double value);
 
-    void visitDouble(double value);
+  void visitFloat(float value);
 
-    void visitByteArray(@Nonnegative int length);
+  void visitInteger(int value);
 
-    void visitIntegerArray(@Nonnegative int length);
+  void visitIntegerArray(@Nonnegative int length);
 
-    void visitString(@Nonnull String value);
+  void visitKey(@Nonnull String name);
 
-    void visitList(@Nullable TagType type, @Nonnegative int length);
+  void visitList(@Nullable TagType type, @Nonnegative int length);
 
-    void visitCompound();
+  void visitLong(long value);
 
-    void visitRoot(@Nonnull String name);
+  void visitRoot(@Nonnull String name);
 
-    void visitKey(@Nonnull String name);
+  void visitShort(short value);
 
-    void visitCompoundEnd();
+  void visitString(@Nonnull String value);
 }

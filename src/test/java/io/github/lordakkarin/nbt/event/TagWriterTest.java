@@ -1,20 +1,17 @@
 package io.github.lordakkarin.nbt.event;
 
-import org.junit.Assert;
-import org.junit.Test;
-
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Paths;
-
 import javax.annotation.Nonnull;
 import javax.annotation.WillNotClose;
-
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Provides test cases to verify the correct functionality of {@link TagWriter}.
@@ -23,76 +20,77 @@ import io.netty.buffer.Unpooled;
  */
 public class TagWriterTest {
 
-    /**
-     * Tests the generation of a hello world NBT file.
-     */
-    @Test
-    public void testHelloWorld() throws IOException {
-        TagWriter writer = new TagWriter();
+  @Nonnull
+  private ByteBuf readResource(@Nonnull @WillNotClose ReadableByteChannel channel)
+      throws IOException {
+    ByteBuf target = Unpooled.directBuffer();
 
-        writer.visitKey("hello world");
-        writer.visitCompound();
-        {
-            writer.visitKey("name");
-            writer.visitString("Bananrama");
-        }
-        writer.visitCompoundEnd();
+    ByteBuffer tmp = ByteBuffer.allocateDirect(128);
+    ByteBuf wrapped = Unpooled.wrappedBuffer(tmp);
+    int length;
 
-        try (InputStream inputStream = this.getClass().getResourceAsStream("/hello_world.nbt")) {
-            ByteBuf expected = this.readResource(Channels.newChannel(inputStream));
-            ByteBuf encoded = writer.getBuffer();
+    while ((length = channel.read(tmp)) > 0) {
+      tmp.flip();
+      target.writeBytes(wrapped, length);
 
-            Assert.assertArrayEquals(this.toArray(expected), this.toArray(encoded));
-        }
+      wrapped.resetReaderIndex();
+      tmp.rewind();
     }
 
-    /**
-     * Tests the generation of a bigger NBT file which contains all known tags.
-     */
-    @Test
-    public void testBig() throws IOException {
-        // TODO: We are using a reader here - This means that failure may carry over!
-        final TagWriter writer = new TagWriter();
+    return target;
+  }
 
-        try (InputStream inputStream = this.getClass().getResourceAsStream("/bigtest.nbt")) {
-            TagReader reader = new TagReader(inputStream);
-            reader.accept(writer);
-        }
+  /**
+   * Tests the generation of a bigger NBT file which contains all known tags.
+   */
+  @Test
+  public void testBig() throws IOException {
+    // TODO: We are using a reader here - This means that failure may carry over!
+    final TagWriter writer = new TagWriter();
 
-        writer.write(Paths.get("test.nbt"));
-
-        try (InputStream inputStream = this.getClass().getResourceAsStream("/bigtest.nbt")) {
-            ByteBuf expected = this.readResource(Channels.newChannel(inputStream));
-            ByteBuf encoded = writer.getBuffer();
-
-            Assert.assertArrayEquals(this.toArray(expected), this.toArray(encoded));
-        }
+    try (InputStream inputStream = this.getClass().getResourceAsStream("/bigtest.nbt")) {
+      TagReader reader = new TagReader(inputStream);
+      reader.accept(writer);
     }
 
-    @Nonnull
-    private ByteBuf readResource(@Nonnull @WillNotClose ReadableByteChannel channel) throws IOException {
-        ByteBuf target = Unpooled.directBuffer();
+    writer.write(Paths.get("test.nbt"));
 
-        ByteBuffer tmp = ByteBuffer.allocateDirect(128);
-        ByteBuf wrapped = Unpooled.wrappedBuffer(tmp);
-        int length;
+    try (InputStream inputStream = this.getClass().getResourceAsStream("/bigtest.nbt")) {
+      ByteBuf expected = this.readResource(Channels.newChannel(inputStream));
+      ByteBuf encoded = writer.getBuffer();
 
-        while ((length = channel.read(tmp)) > 0) {
-            tmp.flip();
-            target.writeBytes(wrapped, length);
-
-            wrapped.resetReaderIndex();
-            tmp.rewind();
-        }
-
-        return target;
+      Assert.assertArrayEquals(this.toArray(expected), this.toArray(encoded));
     }
+  }
 
-    @Nonnull
-    private byte[] toArray(@Nonnull ByteBuf buffer) {
-        byte[] array = new byte[buffer.readableBytes()];
-        buffer.readBytes(array);
+  /**
+   * Tests the generation of a hello world NBT file.
+   */
+  @Test
+  public void testHelloWorld() throws IOException {
+    TagWriter writer = new TagWriter();
 
-        return array;
+    writer.visitKey("hello world");
+    writer.visitCompound();
+    {
+      writer.visitKey("name");
+      writer.visitString("Bananrama");
     }
+    writer.visitCompoundEnd();
+
+    try (InputStream inputStream = this.getClass().getResourceAsStream("/hello_world.nbt")) {
+      ByteBuf expected = this.readResource(Channels.newChannel(inputStream));
+      ByteBuf encoded = writer.getBuffer();
+
+      Assert.assertArrayEquals(this.toArray(expected), this.toArray(encoded));
+    }
+  }
+
+  @Nonnull
+  private byte[] toArray(@Nonnull ByteBuf buffer) {
+    byte[] array = new byte[buffer.readableBytes()];
+    buffer.readBytes(array);
+
+    return array;
+  }
 }
