@@ -1,6 +1,7 @@
-[![License](https://img.shields.io/github/license/LordAkkarin/NBT.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.txt)
-[![Latest Tag](https://img.shields.io/github/tag/LordAkkarin/NBT.svg?style=flat-square&label=Latest Tag)](https://github.com/LordAkkarin/NBT/tags)
-[![Latest Release](https://img.shields.io/github/release/LordAkkarin/NBT.svg?style=flat-square&label=Latest Release)](https://github.com/LordAkkarin/NBT/releases)
+[![License](https://img.shields.io/github/license/dotStart/NBT.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+[![Maven Central](https://img.shields.io/maven-central/v/com.torchmind.utility/version.svg?style=flat-square)](https://search.maven.org/#search%7Cga%7C1%7Cg%3Aio.github.lordakkarin%20a%3Anbt)
+[![GitHub Release](https://img.shields.io/github/release/dotStart/NBT.svg?style=flat-square)](https://github.com/dotStart/NBT/releases)
+[![CircleCI](https://img.shields.io/circleci/project/github/dotStart/NBT.svg?style=flat-square)](https://circleci.com/gh/dotStart/NBT)
 
 NBT
 ===
@@ -21,7 +22,7 @@ Contacts
 --------
 
 * [IRC #Akkarin on EsperNet](http://webchat.esper.net/?channels=Akkarin)
-* [GitHub](https://github.com/LordAkkarin/NBT)
+* [GitHub](https://github.com/dotStart/NBT)
 
 License
 -------
@@ -68,15 +69,15 @@ writer.write(outputStream);
 Downloads
 ---------
 
-Released versions of the library can be found on [GitHub](https://github.com/LordAkkarin/NBT/releases).
+Released versions of the library can be found on [GitHub](https://github.com/dotStart/NBT/releases).
 
 Issues
 ------
 
 You encountered problems with the library or have a suggestion? Create an issue!
 
-1. Make sure your issue has not been fixed in a newer version (check the list of [closed issues](https://github.com/LordAkkarin/NBT/issues?q=is%3Aissue+is%3Aclosed)
-1. Create [a new issue](https://github.com/LordAkkarin/NBT/issues/new) from the [issues page](https://github.com/LordAkkarin/NBT/issues)
+1. Make sure your issue has not been fixed in a newer version (check the list of [closed issues](https://github.com/dotStart/NBT/issues?q=is%3Aissue+is%3Aclosed)
+1. Create [a new issue](https://github.com/dotStart/NBT/issues/new) from the [issues page](https://github.com/dotStart/NBT/issues)
 1. Enter your issue's title (something that summarizes your issue) and create a detailed description containing:
    - What is the expected result?
    - What problem occurs?
@@ -87,7 +88,7 @@ You encountered problems with the library or have a suggestion? Create an issue!
 Building
 --------
 
-1. Clone this repository via ```git clone https://github.com/LordAkkarin/NBT.git``` or download a [zip](https://github.com/LordAkkarin/NBT/archive/master.zip)
+1. Clone this repository via ```git clone https://github.com/dotStart/NBT.git``` or download a [zip](https://github.com/dotStart/NBT/archive/master.zip)
 1. Build the modification by running ```mvn clean install```
 1. The resulting jars can be found in their respective ```target``` directories as well as your local maven repository
 
